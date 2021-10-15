@@ -1,5 +1,5 @@
 #if 0
-    source "${TEST_DIR}/lib/crunner2" -lshell -D_GNU_SOURCE -ldl
+    source "${TEST_DIR}/lib/crunner" -lshell -D_GNU_SOURCE -ldl
 #endif
 
 #include <libgen.h>
