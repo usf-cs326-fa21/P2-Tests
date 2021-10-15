@@ -2,7 +2,6 @@ source "${TEST_DIR}/lib/funcs.bash"
 
 run_timeout=5
 
-
 run_scripts() {
     fail=0
 
@@ -19,7 +18,7 @@ run_scripts() {
         echo; echo
 
         echo "-> Comparing outputs"
-        compare_outputs #|| fail=${?}
+        compare_outputs || fail=${?}
         echo; echo
     done
     return ${fail}
@@ -29,4 +28,4 @@ test_start "Basic Builtins (cd, comments, exit)"
 
 run_scripts
 
-test_end ${fail}
+test_end
