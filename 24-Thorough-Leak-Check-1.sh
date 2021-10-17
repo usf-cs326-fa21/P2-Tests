@@ -21,7 +21,7 @@ program_output=$(valgrind \
     --leak-check=full \
     --track-fds=yes \
     --track-origins=yes \
-    ./$SHELL_NAME < "${TEST_DIR}/inputs/scripts/leak.sh" 2>&1)
+    ./$SHELL_NAME < "${TEST_DIR}/inputs/leak.sh" 2>&1)
 echo "${program_output}"
 
 # Check for open FDs
