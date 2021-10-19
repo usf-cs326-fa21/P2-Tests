@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+test="${1}"
+new_number=$(printf "%02d" "${2}")
+
+new_name=$(echo "${test}" \
+    | sed "s|^\\([0-9][0-9]\\)|${new_number}|g")
+
+mv -vi "${1}" "${new_name}"

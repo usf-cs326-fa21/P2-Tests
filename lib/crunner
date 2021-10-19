@@ -2,7 +2,9 @@
 
 export LD_LIBRARY_PATH="${TEST_DIR}/../"
 
-source "${TEST_DIR}/lib/funcs.bash"
+if [[ -z "${DEBUG}" ]]; then
+    source "${TEST_DIR}/lib/funcs.bash"
+fi
 
 cc -g -Wall ${@} \
     -L"${TEST_DIR}/../" \
@@ -12,6 +14,12 @@ cc -g -Wall ${@} \
     ${0} -o "${0}.out" || exit 1
 
 export test_num test_name test_pts
+
+if [[ -n "${DEBUG}" ]]; then
+    gdb -ex run "${0}.out"
+    rm -f "${0}.out"
+    exit
+fi
 
 "${0}.out"
 result="${?}"

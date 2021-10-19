@@ -63,6 +63,10 @@ for test in ${run_tests}; do
     (( total_points += test_pts ))
 done
 
+if [[ -n "${DEBUG}" ]]; then
+    exit 0
+fi
+
 if [[ ${running_all} == true ]]; then
     perc=$(awk '{ printf("%.1f\n", ($1 / $2) * 100) }' \
         <<< "${points} ${total_points}")
