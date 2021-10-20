@@ -22,11 +22,10 @@ static int comparator(const void *a, const void *b)
 
 test_start("Autocomplete functionality");
 
-init_ui();
-
 subtest("Nothing in PATH",
 {
     setenv("PATH", "", 1);
+    init_ui();
     const char *str = "this_is_a_test";
 
     char *match = command_generator(str, 0);
@@ -36,6 +35,7 @@ subtest("Nothing in PATH",
 subtest("Nothing in PATH, blank input string",
 {
     setenv("PATH", "", 1);
+    init_ui();
     const char *str = "";
 
     int match_count = 0;
@@ -46,6 +46,7 @@ subtest("Nothing in PATH, blank input string",
     }
 
     test_assert(match_count == 4);
+    printf("> match_count = '%d'\n", match_count);
 
     /* Sort the list of matches */
     qsort(matches, match_count, sizeof(const char *), comparator);
@@ -76,6 +77,7 @@ subtest("Single directory in PATH, 'v' entered",
     strcat(fake_path, "a");
 
     setenv("PATH", fake_path, 1);
+    init_ui();
     const char *str = "v";
 
     int match_count = 0;
@@ -86,6 +88,7 @@ subtest("Single directory in PATH, 'v' entered",
     }
 
     test_assert(match_count == 6);
+    printf("> match_count = '%d'\n", match_count);
 
     /* Sort the list of matches */
     qsort(matches, match_count, sizeof(const char *), comparator);
@@ -118,6 +121,7 @@ subtest("Single directory in PATH, '_' entered",
     strcat(fake_path, "a");
 
     setenv("PATH", fake_path, 1);
+    init_ui();
     const char *str = "_";
 
     int match_count = 0;
@@ -178,6 +182,7 @@ subtest("Invalid directories in PATH, 'hello' entered",
             fake_path1, fake_path2, fake_path3, fake_path4);
 
     setenv("PATH", new_path, 1);
+    init_ui();
     const char *str = "hello";
 
     int match_count = 0;
@@ -217,6 +222,7 @@ subtest("Multiple directories in PATH, 'hi' entered",
     snprintf(new_path, new_len, "%s:%s", fake_path1, fake_path2);
 
     setenv("PATH", new_path, 1);
+    init_ui();
     const char *str = "hi";
 
     int match_count = 0;
@@ -280,6 +286,7 @@ subtest("PATH spans many files, 'zi' entered",
 
     printf("path: %s\n", new_path);
     setenv("PATH", new_path, 1);
+    init_ui();
     const char *str = "zi";
 
     int match_count = 0;
