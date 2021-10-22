@@ -15,7 +15,16 @@
 
 void rand_str(char *str, size_t sz)
 {
+    if (sz == 0) {
+        return;
+    }
+
     for (int i = 0; i < sz - 1; ++i){
+        if (i == 0) {
+            str[i] = 'a' + rand() % 26;
+            continue;
+        }
+
         int symb_type = rand() % 4;
         switch (symb_type) {
             case 0:
@@ -23,15 +32,12 @@ void rand_str(char *str, size_t sz)
                 break;
 
             case 1:
+            case 2:
                 str[i] = 'a' + rand() % 26;
                 break;
 
-            case 2:
-                str[i] = 'A' + rand() % 26;
-                break;
-
             case 3:
-                str[i] = '0' + rand() % 10;
+                str[i] = 'A' + rand() % 26;
                 break;
         }
     }
@@ -50,7 +56,7 @@ subtest("Tests many strings against a small 6-element history list",
     hist_init(6);
 
     for (int i = 0; i < 1001110; ++i) {
-        size_t cmd_sz = (rand() % 79) + 1;
+        size_t cmd_sz = (rand() % 78) + 2;
         rand_str(buf, cmd_sz);
         hist_add(buf);
     }
@@ -67,7 +73,7 @@ subtest("Tests many strings against a small 6-element history list",
     char target[81 * 6 + 1] = { 0 };
     char *t_p = target;
     for (int i = 0; i < 6; ++i) {
-        size_t cmd_sz = (rand() % 79) + 1;
+        size_t cmd_sz = (rand() % 78) + 2;
         rand_str(buf, cmd_sz);
         hist_add(buf);
         t_p += sprintf(t_p, "%d %s\n", i + 1001110 + 3, buf);
