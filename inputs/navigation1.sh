@@ -110,8 +110,8 @@ echo Command 131 > /dev/null
 echo Command 132 > /dev/null
 echo Command 133 > /dev/null
 echo Command 134 > /dev/null
-sleep 1 &
-sleep 1 &
+sleep 26
+sleep 1 # yawn
 jobs
 echo Command 136 > /dev/null
 echo Command 137 > /dev/null
