@@ -21,6 +21,7 @@ program_output=$(valgrind \
     --leak-check=full \
     --track-fds=yes \
     --track-origins=yes \
+    --show-leak-kinds=all \
     ./$SHELL_NAME < "${TEST_DIR}/inputs/leak.sh" 2>&1)
 echo "${program_output}"
 
