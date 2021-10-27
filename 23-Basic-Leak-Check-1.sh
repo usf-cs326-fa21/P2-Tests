@@ -35,6 +35,8 @@ program_output=$(timeout ${run_timeout} valgrind \
     --leak-check=full \
     --track-fds=yes \
     --track-origins=yes \
+    --leak-check=full \
+    --show-leak-kinds=all \
     ./$SHELL_NAME < <(echo "${script}") 2>&1)
 
 echo "${program_output}"
