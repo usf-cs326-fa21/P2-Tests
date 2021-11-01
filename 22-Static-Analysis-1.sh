@@ -11,7 +11,7 @@ fi
 
 cppcheck --enable=warning,style,performance,portability \
     --error-exitcode=1 \
-    "${TEST_DIR}/../" || test_end 1
+    "${TEST_DIR}/../"*.{c,h} || test_end 1
 
 cc -Wall -Werror -fsyntax-only "${TEST_DIR}"/../{*.c,*.h} || test_end 1
 
